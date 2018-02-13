@@ -1,6 +1,5 @@
 import React from 'react';
 import { WKey } from './wkey';
-
 import axios from 'axios';
 
 /**
@@ -22,8 +21,8 @@ import axios from 'axios';
  *      In the meantime,
  *      case 1) 
  *          (1) Ajax propmise requestS data to weather api server
- *          (2) Without any error to access the server and get the data
- *              it returns "Resolved status" which means middleware get the data form the server
+ *          (2) Without any error to access the server and get the data,
+ *              it returns "Resolved status" which means middleware gets the data form the server
  *          (3) Then, it puts the data into action property, for instance "payload".
  *          (4) It sends the status and data to "reducers"
  *      
@@ -34,7 +33,7 @@ import axios from 'axios';
  *          (3) It sends the status to "reducers"
  * 
  * Consequently, the middlware controls and manipulates the action.
- * In this case, Reducers is able to minimize the controls such as "switch ....case".
+ * In this case, "Reducers" is able to minimize the controls such as "switch ....case".
  * 
  *      
  * 

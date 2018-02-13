@@ -16,17 +16,18 @@ class SearchBar extends Component {
     
     }
 
+
     // It is from vanila javascript, not from reactjs.
     // "event" is an object of JavaScript
 
     // 1) "this" is "undefined" whent it is invoked by "this.onInputChange"
     //     Therefore, it is required to bind with "this"
     onInputChange (event) {
-        console.log(this, "this function")
+        console.log(this, "this function") // not defined
         console.log(event, "event");
         console.log(event.target.value, "event target value");
 
-        // "this" is "undefined here"
+        // "this" is "undefined here" -> need to bind onInputChange to "this"
         this.setState({term : event.target.value});
 
         
@@ -34,17 +35,17 @@ class SearchBar extends Component {
     }
 
     /*
+    // 2) "this" is "defined", as class object when it is invoked by "event => onInputChanbe(event.target.value)"
+    //    because it is invoked as an function like "onInputChange();""
     onInputChange (term) {
         console.log(this, "this function")
         console.log(event, "event");
         console.log(event.target.value, "event target value");
 
+        // "this" is "defined here" -> no need to bind onInputChange to "this"
         this.setState({term});
 
-        
-
     }*/
-
 
     noSubmit (event) {
 
@@ -81,15 +82,9 @@ class SearchBar extends Component {
                         className = "form-control"
                         value = { this.state.term }
                         
-                        // 1) The way below is invoking "this onInputChange" which is calling SearBar object
+                        // 1) The way below is invoking "this onInputChange" which is not defined in javascript.
                         // It is like the following.
-                        // 
-                        // function a () {
-                        //     return b = "aaa"
-                        //  conole.log(this)
-                        // }
-                        // function a();
-                        // window or undefined (IN ES6 : window == undefined "strict mode")
+                        // Therefore "this" is undefined
                         onChange = { this.onInputChange }
                         
                         // 2) The way below is invoking "event => this.onInputChange(event.target.value)" which is calling SearBar object
@@ -102,7 +97,6 @@ class SearchBar extends Component {
                         // var num =  function a()
                         // " a {b} "
                         // onChange = { event => this.onInputChange(event.target.value) }
-                    
                     />
                     <span className = "input-group-btn">
                         <button type="submit" className = "btn btn-secondary">Search</button>
@@ -111,8 +105,8 @@ class SearchBar extends Component {
             </div>
         );
 
-    }
-    
+    }  
+     
 }
 
 function mapDispatchToProps (dispatch) {
@@ -120,6 +114,7 @@ function mapDispatchToProps (dispatch) {
     return bindActionCreators ({ fetchWeather }, dispatch);
 
 }
+
 // "null" here is not defined yet. So we should use null.
 // When the search bar is empty, the 'term : null' => it is correct scenario.
 // We do not need any state here.
