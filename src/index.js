@@ -11,6 +11,7 @@ import reducers from './reducers';
 // 1)
 // const createStoreWithMiddleware = applyMiddleware()(createStore);
 // As we import ReduxPromise above we can use ReduxPromise as followed.
+
 //2)
 const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
 

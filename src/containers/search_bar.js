@@ -23,6 +23,7 @@ class SearchBar extends Component {
     // 1) "this" is "undefined" whent it is invoked by "this.onInputChange"
     //     Therefore, it is required to bind with "this"
     onInputChange (event) {
+
         console.log(this, "this function") // not defined
         console.log(event, "event");
         console.log(event.target.value, "event target value");
@@ -30,14 +31,13 @@ class SearchBar extends Component {
         // "this" is "undefined here" -> need to bind onInputChange to "this"
         this.setState({term : event.target.value});
 
-        
-
     }
 
     /*
     // 2) "this" is "defined", as class object when it is invoked by "event => onInputChanbe(event.target.value)"
     //    because it is invoked as an function like "onInputChange();""
     onInputChange (term) {
+
         console.log(this, "this function")
         console.log(event, "event");
         console.log(event.target.value, "event target value");
@@ -82,8 +82,7 @@ class SearchBar extends Component {
                         className = "form-control"
                         value = { this.state.term }
                         
-                        // 1) The way below is invoking "this onInputChange" which is not defined in javascript.
-                        // It is like the following.
+                        // 1) The way below is invoking "this.onInputChange" which is not defined in javascript.
                         // Therefore "this" is undefined
                         onChange = { this.onInputChange }
                         
@@ -94,6 +93,7 @@ class SearchBar extends Component {
                         //     return b = "aaa"
                         //  conole.log(this)
                         // }
+                        
                         // var num =  function a()
                         // " a {b} "
                         // onChange = { event => this.onInputChange(event.target.value) }

@@ -43,7 +43,7 @@ import { FETCH_WEATHER } from "../actions";
     // return [action.payload.data] // It is only for one single city
     
     // we are going to have multiple cities here so that we need array.
-    // In redux, we do not mutate "state" like state.index[0] = 1. 
+    // In redux, we do not have to mutate "state" like state.index[0] = 1. 
     // We always use setState to change instant value of the object.
     // In order to avoid the mutation, we use method like below.
     

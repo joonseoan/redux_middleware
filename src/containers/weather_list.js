@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
 
+import GoogleMap from '../components/google_map';
 
 
 /**
@@ -13,15 +14,17 @@ import { connect } from 'react-redux';
  */
 
  // Sparklines: parent component
- // SparklinesLine: a child element to have additional configuration.
+ // SparklinesLine: a child element to have additional configuration or function.
  
  // 1) 
  // It goes to chart.js in components folder to make a single component of the colums.
  // import { Sparklines, SparklinesLine} from 'react-sparklines'
 
 // 2)
-// importing chart.js component
+// importing chart.js component. Chart is an component that is assigned to anonymous functions
 import Chart from '../components/chart.js';
+
+
 
 class WeatherList extends Component {
         
@@ -41,21 +44,30 @@ class WeatherList extends Component {
         }); 
         */
 
-      // ES6
+       // 2) ES6 : it returns the value directly without "return" 
        const temps = cityData.list.map(weather => weather.main.temp);
 
-        console.log(temps, '...temp');
+        console.log(temps, '...temps');
 
        const pressures = cityData.list.map(weather => weather.main.pressure);
        const humidities = cityData.list.map(weather => weather.main.humidity);
        
+       //const lon = cityData.city.coord.lon;
+       //const lat = cityData.city.coord.lat;
+
+       // Destructuring - ES6
+       const { lon, lat } = cityData.city.coord;
+
 
         return (
 
             <tr key = { name } >
                 <td>
-                    { name }
+                     { /* 1) cityData.city.name */}
+                     {/* name */}
+                     <GoogleMap lon = {lon} lat = {lat} />
                 </td>
+
                 <td>
                     {/* It goes to chart.js to make a single component of this colums
                     <Sparklines height= { 120 } width = { 180 }
@@ -72,6 +84,7 @@ class WeatherList extends Component {
                 </td>
 
                 <td><Chart data= { pressures } color = 'green' units = 'hPa'/> </td>
+                
                 <td><Chart data = { humidities } color = 'black' units = '%'/></td>
             </tr>
 
@@ -139,7 +152,7 @@ class WeatherList extends Component {
                             <tr>
                                 <td>
         
-                                         cityData.city.name 
+                                       { cityData.city.name } 
                                 </td>  
                             </tr>  
                             }
